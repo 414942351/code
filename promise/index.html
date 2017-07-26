@@ -2,14 +2,37 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>promise</title>
+	<title>promise-polyfill</title>
 </head>
 <body>
 	<script type="text/javascript">
 		//Promise-polyfill
 		function Promise(fn) {
-			
+			var doneList = [];
+			this.then = function(done) {
+				//保存成功回调，异步
+				doneList.push(done);
+				//链式调用
+				return this;
+			}
+			function resolve() {
+				//放到最后执行，确定donelist里不为空
+				setTimeout(function() {
+					doneList.forEach(function(fulfill) {
+						fulfill();
+					});
+				});
+			}
+			fn(resolve);
 		}
+		var promise = new Promise(function(resolve) {
+			// console.log('hehehe')
+			setTimeout(resolve);
+		});
+		promise.then(function() {
+			console.log('resolve')
+		});
+
 	</script>
 </body>
 </html>
