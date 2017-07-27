@@ -37,41 +37,41 @@
 				//放到最后执行，确定donelist里不为空
 				setTimeout(function(){
 		      var value = newValue;
-		      for (var i = 0;i<doneList.length;i++){
+		      for (var i = 0; i < doneList.length; i++){
 		        var temp = doneList[i](value);
 		        if(temp instanceof Promise){
-		            var newP =  temp;
-		            for(i++;i<doneList.length;i++){
-		                newP.then(doneList[i],failList[i]);
-		            }
+	            var newP =  temp;
+	            for(i++; i < doneList.length; i++){
+								newP.then(doneList[i],failList[i]);
+	            }
 		        }else{
-		            value = temp;
+							value = temp;
 		        }
 		      }
-		    },0);
+		    }, 0);
 					// doneList.forEach(function(fulfill) {
 					// 	value = fulfill(value);
 					// });
 			}
-			function reject(newValue){
+			function reject(newValue) {
 		    state = "rejected";
-		    setTimeout(function(){
+		    setTimeout(function() {
 		      var value = newValue;
 		      var tempRe = failList[0](value);
 		      //如果reject里面传入了一个promise，那么执行完此次的fail之后，将剩余的done和fail传入新的promise中
-		      if(tempRe instanceof Promise){
+		      if(tempRe instanceof Promise) {
 		        var newP = tempRe;
-		        for(i=1;i<doneList.length;i++){
+		        for(i = 1;i < doneList.length; i++) {
 		            newP.then(doneList[i],failList[i]);
 		        }
-		      }else{
+		      }else {
 		        //如果不是promise，执行完当前的fail之后，继续执行doneList
-		        value =  tempRe;
+		        value = tempRe;
 		        doneList.shift();
 		        failList.shift();
 		        resolve(value);
 		      }
-		    },0);
+		    }, 0);
 		  }
 			fn(resolve, reject);
 		}
