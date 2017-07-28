@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>dataBind</title>
+</head>
+<body>
+	<script>
+	var data = {
+		name: 'yan'
+	}
+	observe(data);
+	data.name = 'bing'
+		function observe(data) {
+			if(!data || typeof data !== 'object') {
+				return;
+			}
+			Object.keys(data).forEach(function(key) {
+				defineReactive(data, key, data[key]);
+			});
+		}
+
+		function defineReactive(data, key, val) {
+			var dep = new Dep();
+			console.log(dep.__proto__);
+			observe(val);//监听子属性
+			Object.defineProperty(data, key, {
+				enumerable: true,
+				configurable: false,
+				get: function() {
+					return val;
+				},
+				set: function(newVal) {
+					if(val === newVal) {
+						return;
+					}
+					console.log('监听到变化', val, '--->', newVal);
+					val = newVal;
+					dep.notify();//通知所有订阅者
+					// console.log(dep.notify)
+				}
+			});
+		}
+
+		function Dep() {
+			this.subs = [];
+		}
+
+		Dep.prototype = {
+			addSub: function(sub) {
+				this.subs.push(sub);
+				console.log(this.subs);
+			},
+			notify: function() {
+				this.subs.forEach(function(sub) {
+					sub.update();
+				})
+			}
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	</script>			
+</body>
+</html>
