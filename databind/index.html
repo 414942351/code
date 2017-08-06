@@ -55,26 +55,26 @@
       	});
       },
 
-      compile: function(node) {
-      	var nodeAttrs = node.attributes,
-      	me = this;
+    compile: function(node) {
+	  	var nodeAttrs = node.attributes,
+	  	me = this;
 
-      	[].slice.call(nodeAttrs).forEach(function(attr) {
-      		var attrName = attr.name;
-      		if (me.isDirective(attrName)) {
-      			var exp = attr.value;
-      			var dir = attrName.substring(2);
-                // 事件指令
-                if (me.isEventDirective(dir)) {
-                	compileUtil.eventHandler(node, me.$vm, exp, dir);
-                    // 普通指令
-                  } else {
-                  	compileUtil[dir] && compileUtil[dir](node, me.$vm, exp);
-                  }
+    	[].slice.call(nodeAttrs).forEach(function(attr) {
+    		var attrName = attr.name;
+    		if (me.isDirective(attrName)) {
+    			var exp = attr.value;
+    			var dir = attrName.substring(2);
+          // 事件指令
+          if (me.isEventDirective(dir)) {
+          	compileUtil.eventHandler(node, me.$vm, exp, dir);
+              // 普通指令
+            } else {
+            	compileUtil[dir] && compileUtil[dir](node, me.$vm, exp);
+            }
 
-                  node.removeAttribute(attrName);
-                }
-              });
+            node.removeAttribute(attrName);
+          }
+        });
       },
 
       compileText: function(node, exp) {
@@ -161,13 +161,13 @@ var compileUtil = {
     	var val = vm;
     	exp = exp.split('.');
     	exp.forEach(function(k, i) {
-            // 非最后一个key，更新val的值
-            if (i < exp.length - 1) {
-            	val = val[k];
-            } else {
-            	val[k] = value;
-            }
-          });
+        // 非最后一个key，更新val的值
+        if (i < exp.length - 1) {
+        	val = val[k];
+        } else {
+        	val[k] = value;
+        }
+      });
     }
   };
 
