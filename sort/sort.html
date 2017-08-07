@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>sort</title>
+</head>
+<body>
+	<script>
+		//插入排序
+		function sort(arr) {
+			if(arr.length <= 1) {
+				return arr;
+			}
+			for(var i = 0; i < arr.length; i++) {
+				for(var j = i - 1; j >= 0; j--) {
+					if(arr[j+1] < arr[j]) {
+						var temp = arr[j+1];
+						arr[j+1] = arr[j];
+						arr[j] = temp;
+					}
+				}
+			}
+			return arr;
+		}
+		//冒泡
+		function bubbleSort(arr) {
+		  if(arr.length <= 1) {
+		    return arr;
+		  }
+		  for(var j=0; j<arr.length; j++) {
+		    for(var i=0; i<arr.length-j; i++) {
+		      if(arr[i] > arr[i+1]) {
+		        var tmp = arr[i];
+		        arr[i] = arr[i+1];
+		        arr[i+1] = tmp;
+		      }
+		    }
+		  }
+
+		  return arr;
+		}
+		//快排
+		function quickSort(arr) {
+		  if (arr.length <= 1) {
+		    return arr.slice(0);
+		  }
+
+		  var left = [];
+		  var right = [];
+		  var mid = [arr[0]]; //first number as a pivot
+
+		  for (var i = 1; i < arr.length; i++) {
+		    if (arr[i] < mid[0]) {
+		      left.push(arr[i]);
+		    } else {
+		      right.push(arr[i]);
+		    }
+		  }
+
+		  return quickSort(left).concat(mid.concat(quickSort(right)));
+		}
+
+
+	</script>
+</body>
+</html>
