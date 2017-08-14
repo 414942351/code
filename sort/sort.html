@@ -7,21 +7,21 @@
 <body>
 	<script>
 		//插入排序
-		function sort(arr) {
-			if(arr.length <= 1) {
-				return arr;
-			}
-			for(var i = 0; i < arr.length; i++) {
-				for(var j = i - 1; j >= 0; j--) {
-					if(arr[j+1] < arr[j]) {
-						var temp = arr[j+1];
-						arr[j+1] = arr[j];
-						arr[j] = temp;
-					}
-				}
-			}
-			return arr;
-		}
+		// function sort(arr) {
+		// 	if(arr.length <= 1) {
+		// 		return arr;
+		// 	}
+		// 	for(var i = 0; i < arr.length; i++) {
+		// 		for(var j = i - 1; j >= 0; j--) {
+		// 			if(arr[j+1] < arr[j]) {
+		// 				var temp = arr[j+1];
+		// 				arr[j+1] = arr[j];
+		// 				arr[j] = temp;
+		// 			}
+		// 		}
+		// 	}
+		// 	return arr;
+		// }
 		//冒泡
 		function bubbleSort(arr) {
 		  if(arr.length <= 1) {
@@ -44,7 +44,6 @@
 		  if (arr.length <= 1) {
 		    return arr.slice(0);
 		  }
-
 		  var left = [];
 		  var right = [];
 		  var mid = [arr[0]]; //first number as a pivot
