@@ -7,6 +7,7 @@
 <body>
 	<script type="text/javascript">
 		//Promise-polyfill
+		
 		function Promise(fn) {
 			var state = 'pending';
 			var doneList = [];
@@ -35,7 +36,7 @@
 				//异步结果传递
 				var value = newValue;
 				//放到最后执行，确定donelist里不为空
-				setTimeout(function(){
+				setTimeout(function() {
 		      var value = newValue;
 		      for (var i = 0; i < doneList.length; i++){
 		        var temp = doneList[i](value);
