@@ -1,4 +1,24 @@
-var _ = require('./lodash.js');
-console.log(_.chunk(['a', 'b', 'c', 'd'], 2));//将array分割成args2长度的块，最后剩余的元素组成一个块，把这些块组成一个新数组
+var _ = require('./lodash');
+_.every([true, 1, null, 'yes'], Boolean);
+// => false
+
+var users = [
+  { 'user': 'barney', 'active': false },
+  { 'user': 'fred',   'active': false }
+];
+
+// using the `_.matches` callback shorthand
+_.every(users, { 'user': 'barney', 'active': false });
+// => false
+
+// using the `_.matchesProperty` callback shorthand
+_.every(users, 'active', false);
+// => true
+
+// using the `_.property` callback shorthand
+_.every(users, 'active');
+// => false
 
 
+_.capitalize('fred');
+_.deburr([string='']);
